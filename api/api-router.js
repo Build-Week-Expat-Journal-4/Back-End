@@ -11,7 +11,7 @@ router.use("/auth", authRouter);
 router.use("/users", restricted, usersRouter);
 
 router.get("/", (req, res) => {
-  res.json({ api: "router is working." });
+  res.json({ api: "api endpoint is working." });
 });
 
 module.exports = router;
