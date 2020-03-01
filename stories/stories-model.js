@@ -21,7 +21,7 @@ function findById(id){
     return db('stories as s')
         .join('users as u','s.user_id','u.id')
         .where('s.id',Number(id))
-        .select('s.id','s.title','s.story','s.img-link','s.date-pic-taken','s.location','u.first_name','u.last_name','s.created_at','s.updated_at')
+        .select('s.id','s.title','s.story','s.img-link','s.date-pic-taken','s.location','u.first_name','u.last_name','s.created_at','s.updated_at').first()
 }
 
 //get a all stories for a specific user

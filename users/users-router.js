@@ -17,6 +17,13 @@ router.get("/", (req, res) => {
 });
 
 //story related routes;
+router.get("/:id/stories", (req, res) => {
+    const id = req.params.id;
+    Stories.findByUserId(id)
+      .then(stories => res.status(200).json(stories))
+      .catch(err => res.status(500).json({error: "Unable to obtain stories"}))
+     
+})
 router.post("/:id/stories", (req, res) => {
   const story = req.body;
   story.user_id = req.params.id;
@@ -26,6 +33,10 @@ router.post("/:id/stories", (req, res) => {
     .catch(err => res.status(500).json({error: "Unable to create a story"}))
     
 })
+
+
+
+
 
 
 
