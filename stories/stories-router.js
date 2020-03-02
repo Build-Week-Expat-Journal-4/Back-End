@@ -42,7 +42,7 @@ router.delete("/:id", findStory, (req, res) => {
     const id = req.params.id;
     
     Stories.remove(id)
-        .then(count => res.status(200).json({remove: id}))
+        .then(count => res.status(200).json({removed: id}))
         .catch( err => res.status(500).json({error: "Unable to delete"}))
 
         

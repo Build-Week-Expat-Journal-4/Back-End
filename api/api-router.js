@@ -10,7 +10,7 @@ const restricted = require("../auth/restricted-middleware.js");
 
 router.use("/auth", authRouter);
 router.use("/users", restricted, usersRouter);
-router.use("/stories", storiesRouter);
+router.use("/stories", restricted,storiesRouter);
 
 
 router.get("/", (req, res) => {
