@@ -36,10 +36,10 @@ function findByUserId(userId){
 //post - Create  a story
 
 function add(story){
-    return db(stories).insert(story,'id')
+    return db('stories').insert(story,'id')
         .then(ids => {
             const [id] = ids;
-            findById(id)
+            return findById(id)
         } )
 
 }
@@ -55,7 +55,8 @@ function update(changes,id){
 //Delete a story
 
 function remove(id){
-    return db(stories).where({id}).del().then(count => {deleted: id})
+
+    return db('stories').where({id}).del()
 }
 
 

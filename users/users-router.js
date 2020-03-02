@@ -19,18 +19,32 @@ router.get("/", (req, res) => {
 //story related routes;
 router.get("/:id/stories", (req, res) => {
     const id = req.params.id;
-    Stories.findByUserId(id)
-      .then(stories => res.status(200).json(stories))
-      .catch(err => res.status(500).json({error: "Unable to obtain stories"}))
+    Users.findById(id)
+      .then(user => {
+        if (user) {
+          Stories.findByUserId(id)
+            .then(stories => res.status(200).json(stories))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({error: "Unable to obtain stories"})})
+
+        } else {
+          res.status(400).json({error: "The user doesn't exist"})
+        }
+      })
+      .catch(err => res.status(500).json({error: "Unable to find the user"}))
+    
      
 })
 router.post("/:id/stories", (req, res) => {
   const story = req.body;
   story.user_id = req.params.id;
-
+  console.log(story);
   Stories.add(story)
     .then (story => res.status(201).json(story) )
-    .catch(err => res.status(500).json({error: "Unable to create a story"}))
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({error: "Unable to create a story"})})
     
 })
 

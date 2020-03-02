@@ -15,45 +15,54 @@ router.get("/:id", (req, res) => {
     const id = req.params.id;
 
     Stories.findById(id)
-        .then(story => res.status(200).json(story))
+        .then(story => {
+            if(story){
+                res.status(200).json(story)
+            } else {
+                res.status(400).json({error: "This story doesn't exist"})
+            }
+        })
         .catch(err => res.status(500).json({error: "Unable to obtain the story"}))
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", findStory, (req, res) => {
     const story = req.body;
-    Stories.findById(id)
-        .then(story => {
-            if (story) {
-                Stories.update(story,story.id)
-                    .then (story => res.status(201).json(story) )
-                    .catch(err => res.status(500).json({error: "Unable to update the story"}))
-            } 
-        })
-        .catch(err => res.status(400).json({error: "The story doesn't exist"}))
-    
-    
+    const id = req.params.id;
+    Stories.update(story,id)
+        .then (story => res.status(200).json(story) )
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: "Unable to update the story"})})
       
   })
 
 //remove a story
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", findStory, (req, res) => {
     const id = req.params.id;
-    Stories.findById
-        .then(story => {
-            if (story) {
-                Stories.remove(story.id)
-                .then(id => res.status(200).json({removed: id}))
-                .catch(err => res.status(500).json({error: "Unable to delete the story"}))
-            
-            }
-        })
-        .catch(err => res.status(400).json({error: "The story doesn't exist"}))
-
+    
+    Stories.remove(id)
+        .then(count => res.status(200).json({remove: id}))
+        .catch( err => res.status(500).json({error: "Unable to delete"}))
 
         
 }) 
 
+function findStory(req, res, next){
+    const id = req.params.id;
+    Stories.findById(id)
+    .then(found => {
+        if (found) {
+           
+            next();
+            
+        } else {
+            res.status(400).json({error: "This story doesn't exist"})
+        }
+    })
+    .catch(err => res.status(400).json({error: "Unable to find the story"}))
+
+}
 
 module.exports = router;
 
