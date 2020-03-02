@@ -22,6 +22,7 @@ function find() {
       "s.location",
       "u.first_name",
       "u.last_name",
+      "u.id",
       "s.created_at",
       "s.updated_at"
     );
@@ -40,6 +41,7 @@ function findById(id) {
       "s.location",
       "u.first_name",
       "u.last_name",
+      "u.id",
       "s.created_at",
       "s.updated_at"
     )
@@ -61,6 +63,7 @@ function findByUserId(userId) {
       "s.location",
       "u.first_name",
       "u.last_name",
+      "u.id",
       "s.created_at",
       "s.updated_at"
     );
