@@ -4,11 +4,13 @@ module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  remove,
+  update
 };
 
 function find() {
-  return db("users").select("username");
+  return db("users").select("id", "first_name", "last_name", "email", "username");
   // TODO what information about other users do we want to return to a single user?
 }
 
@@ -32,4 +34,19 @@ function findById(id) {
     .select("id", "username")
     .where({ id })
     .first();
+}
+
+function remove(id) {
+  return db("users")
+  .where({id})
+  .del()
+}
+
+function update(id, changes) {
+  return db("users")
+  .where({id})
+  .update(changes)
+  .then(count => {
+    findById(id);
+  })
 }
