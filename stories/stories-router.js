@@ -5,7 +5,9 @@ const router = require("express").Router();
 router.get("/", (req, res) => {
   Stories.find()
     .then(stories => res.status(200).json(stories))
-    .catch(err => res.status(500).json({ error: "Unable to get stories" }));
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ error: "Unable to get stories" })});
 });
 
 //find a specific story
