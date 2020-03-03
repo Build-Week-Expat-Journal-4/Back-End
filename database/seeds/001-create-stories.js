@@ -16,7 +16,7 @@ exports.seed = function(knex) {
       "img_link":"https://unsplash.com/photos/Sw57gA_fojQ",
       "date_pic_taken":"11-11-2011",
       "location":"Paris,France",
-      "user_id": 3 d
+      "user_id": 3 
 
     } ,
     {
