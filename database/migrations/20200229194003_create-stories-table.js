@@ -4,8 +4,8 @@ exports.up = function(knex) {
       tbl.increments();
       tbl.string('title',255).notNullable();
       tbl.string('story',1000).notNullable();
-      tbl.string('img-link',255).notNullable();
-      tbl.date('date-pic-taken').notNullable();
+      tbl.string('img_link',255).notNullable();
+      tbl.date('date_pic_taken').notNullable();
       tbl.string('location',255).notNullable();
       tbl.integer('user_id')
         .unsigned()
