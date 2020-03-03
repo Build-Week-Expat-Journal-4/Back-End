@@ -29,6 +29,7 @@ module.exports = {
     connection: {
       filename: "./database/expat-test.db3"
     },
+    
     migrations: {
       directory: "./database/migrations",
       tableName: "knex_migrations"
