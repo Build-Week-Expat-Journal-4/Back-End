@@ -31,7 +31,7 @@ function add(user) {
 
 function findById(id) {
   return db("users")
-    .select("id", "username")
+    .select("id", "username", "email")
     .where({ id })
     .first();
 }
@@ -47,6 +47,6 @@ function update(id, changes) {
   .where({id})
   .update(changes)
   .then(count => {
-    findById(id);
+   return findById(id);
   })
 }

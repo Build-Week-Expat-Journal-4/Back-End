@@ -13,7 +13,7 @@ const testUser = {
 };
 
 let username;
-// let token;
+
 
 describe("auth router", () => {
   it("should run the tests", () => {
@@ -26,7 +26,7 @@ describe("auth router", () => {
         .post("/api/auth/register")
         .send(testUser)
         .then(response => {
-          console.log(response.body.api);
+          // console.log(response.body.api);
           username = response.body.username;
           expect(response.status).toBe(201);
         });
@@ -42,7 +42,7 @@ describe("auth router", () => {
     });
   });
 
-  describe("POST /login", () => {
+  describe.skip("POST /login", () => {
     it("should login a user and then reach get the users route", () => {
       return request(server)
         .post("/api/auth/login")
@@ -60,7 +60,7 @@ describe("auth router", () => {
             });
         });
     });
-    it("should deny login", () => {
+    it.skip("should deny login", () => {
       return request(server)
         .post("/api/auth/login")
         .send({ username: "trick", password: "tricky" })
