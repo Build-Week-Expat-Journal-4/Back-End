@@ -47,6 +47,6 @@ function update(id, changes) {
   .where({id})
   .update(changes)
   .then(count => {
-    findById(id);
+    return findById(id);
   })
 }
