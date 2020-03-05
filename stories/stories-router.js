@@ -7,7 +7,8 @@ router.get("/", (req, res) => {
     .then(stories => res.status(200).json(stories))
     .catch(err => {
       console.log(err);
-      res.status(500).json({ error: "Unable to get stories" })});
+      res.status(500).json({ error: "Unable to get stories" });
+    });
 });
 
 //find a specific story
@@ -29,9 +30,10 @@ router.get("/:id", (req, res) => {
 });
 
 router.put("/:id", findStory, (req, res) => {
-  const story = req.body;
+  const { title, location, story } = req.body;
+  const newStory = { title, location, story };
   const id = req.params.id;
-  Stories.update(story, id)
+  Stories.update(newStory, id)
     .then(story => res.status(200).json(story))
     .catch(err => {
       console.log(err);
